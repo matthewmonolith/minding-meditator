@@ -21,7 +21,7 @@ function Navbar() {
   ];
 
   return (
-    <div className="bg-purple-300 p-4 flex items-center relative text-white">
+    <div className="bg-teals-2 p-4 flex items-center relative text-white">
       <Link to="/" className="inline-block">
         <LuAlarmClockCheck className="text-2xl" />
       </Link>
@@ -29,7 +29,7 @@ function Navbar() {
         {links.map((link) => {
           const isActive = activeLink == link.href;
           return (
-            <Link to={link.href} className={isActive ? "font-bold" : ""} key={link.title}>
+            <Link to={link.href} className={isActive ? "underline" : ""} key={link.title}>
               {link.title}
             </Link>
           );
