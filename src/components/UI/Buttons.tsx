@@ -2,12 +2,10 @@ import { FiPlay, FiPause, FiRefreshCw } from "react-icons/fi";
 
 export const ActionButton = ({
   action,
-  type,
-  handleClick
+  handleClick,
 }: {
   action: "start" | "pause" | "restart";
-  type: "reminder" | "main";
-  handleClick
+  handleClick: () => void;
 }) => {
   const getIcon = () => {
     switch (action) {
@@ -41,18 +39,21 @@ export const ActionButton = ({
   );
 };
 
-
-export const MainTimerButton = ({
+export const TimerButton = ({
   expiryTimestamp,
   isSelected,
   handleClick,
+  type = "main",
 }: {
   expiryTimestamp: string;
   isSelected: boolean;
   handleClick: () => void;
+  type?: "main" | "reminder";
 }) => {
+  const colourStyles = type === "main" ? "bg-soft-4": "bg-soft-3"
+
   return (
-    <div className="relative group">
+    <div className="relative">
       <button
         className={`
           mx-5 my-3 w-40 h-40 rounded-full 
@@ -60,11 +61,7 @@ export const MainTimerButton = ({
           text-white text-2xl font-bold 
           transform transition-transform duration-300 ease-in-out 
           hover:scale-110
-          ${
-            isSelected
-              ? "bg-northernLights-5 ring-4 ring-northernLights-5"
-              : "bg-northernLights-3 hover:bg-northernLights-5"
-          }
+          ${colourStyles}
         `}
         onClick={handleClick}
       >
