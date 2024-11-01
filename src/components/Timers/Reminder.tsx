@@ -22,7 +22,9 @@ function Reminder({
       const [minutes, seconds] = timeStamp.split(":").map(Number);
       const now = new Date();
       now.setSeconds(now.getSeconds() + minutes * 60 + seconds);
-      restart(now, true)
+      setTimeout(() => {
+        restart(now);
+        }, 1)        
     },
   });
 
