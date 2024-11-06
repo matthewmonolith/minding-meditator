@@ -5,33 +5,30 @@ import {
   buildStyles,
 } from "react-circular-progressbar";
 import { useCalculateMaxTime } from "../../utils/hooks/useCalculateMaxTime";
-import { useConvertToDate } from "../../utils/hooks/useConvertToDate";
-import { useEffect } from "react";
+import { newTimeStamp } from "../../utils/times";
 
 function Reminder({
   timeStamp,
 }: {
   timeStamp: string;
 }) {
-  const expiryTimestamp = useConvertToDate(timeStamp)
 
-  const { seconds, minutes, start, pause, restart } = useTimer({
+
+  const expiryTimestamp = newTimeStamp(timeStamp)
+
+  const { seconds, minutes, pause, restart, resume } = useTimer({
     expiryTimestamp,
     autoStart: false,
     onExpire: () => {
-      const [minutes, seconds] = timeStamp.split(":").map(Number);
-      const now = new Date();
-      now.setSeconds(now.getSeconds() + minutes * 60 + seconds);
+      const now = newTimeStamp(timeStamp, true)
       setTimeout(() => {
         restart(now);
-        }, 1)        
+        }, 1000)        
     },
   });
 
   const maxTime = useCalculateMaxTime(timeStamp);
-
   const minsToSeconds = minutes * 60 + seconds;
-
   const currentTimeString = `${String(minutes)}:${String(seconds)}`;
 
   return (
@@ -52,7 +49,7 @@ function Reminder({
             {currentTimeString}
           </div>
           <div className="flex">
-            <ActionButton action="start" handleClick={start} />
+            <ActionButton action="start" handleClick={resume} />
             <ActionButton action="pause" handleClick={pause} />
             <ActionButton action="restart" handleClick={() => (restart(expiryTimestamp, false))} />
           </div>
