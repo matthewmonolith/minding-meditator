@@ -50,7 +50,7 @@ export const TimerButton = ({
   handleClick: () => void;
   type?: "main" | "reminder";
 }) => {
-  const colourStyles = type === "main" ? "bg-soft-4": "bg-soft-3"
+  const colourStyles = type === "main" ? "bg-soft-4": "bg-soft-2"
 
   return (
     <div className="relative">

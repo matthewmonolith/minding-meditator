@@ -3,6 +3,8 @@ import Reminder from "../components/Timers/Reminder";
 import { mainTimes, reminderTimes } from "../utils/times";
 import { TimerButton } from "../components/UI/Buttons";
 import { useReducer } from "react";
+import { sounds } from "../utils/sounds";
+import Sound from "../components/Sounds/Sound";
 
 function Timer() {
   type TimerAction =
@@ -15,7 +17,7 @@ function Timer() {
     action: TimerAction
   ) => {
     switch (action.type) {
-      case "SET_SELECTED_TIMER":       
+      case "SET_SELECTED_TIMER":
         return {
           ...state,
           selectedTimer: action.payload,
@@ -73,17 +75,14 @@ function Timer() {
           );
         })}
       </div>
-      <h2 className="text-4xl font-bold text-white text-center bg-soft-3 inline-block py-3 px-5 rounded-full">
+      <h2 className="text-4xl font-bold text-white text-center bg-soft-2 inline-block py-3 px-5 rounded-full">
         Reminders
       </h2>
       <div className="flex flex-wrap justify-center mt-6 mb-4">
         {reminderTimes.map((time) => {
           const isSelectedTimer = state.selectedReminder === time;
           return isSelectedTimer ? (
-            <Reminder
-              timeStamp={time}
-              key={time}
-            />
+            <Reminder timeStamp={time} key={time} />
           ) : (
             <TimerButton
               type="reminder"
@@ -91,6 +90,20 @@ function Timer() {
               expiryTimestamp={time}
               isSelected={isSelectedTimer}
               handleClick={() => handleClick(time, "reminder")}
+            />
+          );
+        })}
+      </div>
+      <h2 className="text-4xl font-bold text-white text-center bg-blue-200 inline-block py-3 px-5 rounded-full">
+        Reminder Sounds
+      </h2>
+      <div className="flex flex-wrap justify-center mt-6 mb-4">
+        {sounds.map((sound: { name: string; soundPath: string }) => {
+          return (
+            <Sound
+              soundName={sound.name}
+              soundFilePath={sound.soundPath}
+              key={sound.name}
             />
           );
         })}
