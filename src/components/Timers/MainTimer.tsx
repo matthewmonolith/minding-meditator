@@ -31,7 +31,7 @@ function MainTimer({
   const currentTimeString = `${String(minutes)}:${String(seconds)}`;
 
   return (
-    <div>
+    <div style={{width: "230px"}}>
       <CircularProgressbarWithChildren
         value={minsToSeconds}
         maxValue={maxTime}
@@ -49,8 +49,8 @@ function MainTimer({
             {currentTimeString}
           </div>
           <div className="flex">
-            <ActionButton action="start" type="main" handleClick={start} />
-            <ActionButton action="pause" type="main" handleClick={pause} />
+            <ActionButton action="start"  handleClick={start} />
+            <ActionButton action="pause" handleClick={pause} />
             {/* <ActionButton action="restart" type="main" handleClick={restart} /> */}
           </div>
         </div>

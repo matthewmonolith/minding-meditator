@@ -32,7 +32,7 @@ function Reminder({
   const currentTimeString = `${String(minutes)}:${String(seconds)}`;
 
   return (
-    <div>
+    <div style={{width: "230px"}}>
       <CircularProgressbarWithChildren
         value={minsToSeconds}
         maxValue={maxTime}

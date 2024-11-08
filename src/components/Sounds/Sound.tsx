@@ -3,10 +3,8 @@ import { SoundContext } from "../../context/SoundContext";
 
 function Sound({
   soundName,
-  soundFilePath,
 }: {
-  sound: string;
-  soundFilePath: string;
+  soundName: string;
 }) {
   const { sound, setSound } = useContext(SoundContext);
 
