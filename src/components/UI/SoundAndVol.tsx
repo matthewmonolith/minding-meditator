@@ -1,9 +1,10 @@
 import { HiSpeakerWave, HiSpeakerXMark } from "react-icons/hi2";
 import { useContext } from "react";
 import { SoundContext } from "../../context/SoundContext";
+import { SET_VOLUME, MUTE, UNMUTE } from "../../context/SoundContext";
 
 function SoundAndVol() {
-  const { volume, setVolume, mute, unMute } = useContext(SoundContext);
+  const { volume, dispatch } = useContext(SoundContext);
 
   return (
     <div
@@ -12,9 +13,19 @@ function SoundAndVol() {
     >
       <div className="flex justify-around items-center gap-3 w-full">
         {volume > 0 ? (
-          <HiSpeakerWave onClick={mute} className="cursor-pointer" />
+          <HiSpeakerWave
+            onClick={() => {
+              dispatch({ type: MUTE });
+            }}
+            className="cursor-pointer"
+          />
         ) : (
-          <HiSpeakerXMark onClick={unMute} className="cursor-pointer" />
+          <HiSpeakerXMark
+            onClick={() => {
+              dispatch({ type: UNMUTE });
+            }}
+            className="cursor-pointer"
+          />
         )}
         <input
           type="range"
@@ -22,7 +33,9 @@ function SoundAndVol() {
           max="1"
           step="0.01"
           value={volume}
-          onChange={(e) => setVolume(parseFloat(e.target.value))}
+          onChange={(e) =>
+            dispatch({ type: SET_VOLUME, payload: parseFloat(e.target.value) })
+          }
           className="w-full"
         />
       </div>

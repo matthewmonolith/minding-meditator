@@ -1,6 +1,6 @@
 import { mainTimes, reminderTimes } from "../utils/times";
 import { useReducer } from "react";
-import { sounds } from "../utils/sounds";
+import { reminderSounds, meditationSounds } from "../utils/sounds";
 import { Header } from "../components/UI/Header";
 import { TimerSection } from "../components/Timers/TimerSection";
 import { SoundSection } from "../components/Sounds/SoundSection";
@@ -53,7 +53,7 @@ function Timer() {
 
   return (
     <div className="flex flex-col items-center">
-      <Header title="Meditation Timers" bgColor="bg-soft-4" />
+      <Header title="Meditation Timers" bgColor="bg-soft-6" />
       <TimerSection
         times={mainTimes}
         selectedTime={state.selectedTimer}
@@ -61,7 +61,10 @@ function Timer() {
         type="main"
       />
 
-      <Header title="Reminders" bgColor="bg-soft-2" />
+      <Header title="Meditation Sounds" bgColor="bg-blue-300" />
+      <SoundSection sounds={meditationSounds} isMeditationSound={true}/>
+
+      <Header title="Reminders" bgColor="bg-soft-4" />
       <TimerSection
         times={reminderTimes}
         selectedTime={state.selectedReminder}
@@ -69,8 +72,8 @@ function Timer() {
         type="reminder"
       />
 
-      <Header title="Reminder Sounds" bgColor="bg-blue-200" />
-      <SoundSection sounds={sounds} />
+      <Header title="Reminder Sounds" bgColor="bg-blue-300" />
+      <SoundSection sounds={reminderSounds} isMeditationSound={false}/>
       <SoundAndVol />
     </div>
   );

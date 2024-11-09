@@ -6,42 +6,42 @@ import {
 } from "react-circular-progressbar";
 import { useCalculateMaxTime } from "../../utils/hooks/useCalculateMaxTime";
 import { newTimeStamp } from "../../utils/times";
+import { useContext } from "react";
+import { SoundContext } from "../../context/SoundContext";
+import { PLAY_SOUND } from "../../context/SoundContext";
 
-function Reminder({
-  timeStamp,
-}: {
-  timeStamp: string;
-}) {
-
-
-  const expiryTimestamp = newTimeStamp(timeStamp)
+function Reminder({ timeStamp }: { timeStamp: string }) {
+  const expiryTimestamp = newTimeStamp(timeStamp);
 
   const { seconds, minutes, pause, restart, resume } = useTimer({
     expiryTimestamp,
     autoStart: false,
     onExpire: () => {
-      const now = newTimeStamp(timeStamp, true)
+      dispatch({ type: PLAY_SOUND, payload: { isMeditation: false } });
+      const now = newTimeStamp(timeStamp, true);
       setTimeout(() => {
         restart(now);
-        }, 1000)        
+      }, 1000);
     },
   });
+
+  const { dispatch } = useContext(SoundContext);
 
   const maxTime = useCalculateMaxTime(timeStamp);
   const minsToSeconds = minutes * 60 + seconds;
   const currentTimeString = `${String(minutes)}:${String(seconds)}`;
 
   return (
-    <div style={{width: "230px"}}>
+    <div style={{ width: "230px" }}>
       <CircularProgressbarWithChildren
         value={minsToSeconds}
         maxValue={maxTime}
         background
         styles={buildStyles({
           textColor: "#FFF",
-          backgroundColor: "#04BF8A",
-          pathColor: "#024059",
-          trailColor: "#FFF",
+          backgroundColor: "#9D92E9",
+          pathColor: "#746CC7",
+          trailColor: "#F3F2F7",
         })}
       >
         <div className="flex flex-col">
@@ -51,7 +51,10 @@ function Reminder({
           <div className="flex">
             <ActionButton action="start" handleClick={resume} />
             <ActionButton action="pause" handleClick={pause} />
-            <ActionButton action="restart" handleClick={() => (restart(expiryTimestamp, false))} />
+            <ActionButton
+              action="restart"
+              handleClick={() => restart(expiryTimestamp, false)}
+            />
           </div>
         </div>
       </CircularProgressbarWithChildren>

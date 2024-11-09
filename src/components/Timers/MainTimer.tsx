@@ -1,47 +1,43 @@
 import { useTimer } from "react-timer-hook";
 import { ActionButton } from "../UI/Buttons";
 import {
-  CircularProgressbar,
   CircularProgressbarWithChildren,
   buildStyles,
 } from "react-circular-progressbar";
 import { useCalculateMaxTime } from "../../utils/hooks/useCalculateMaxTime";
-import { useConvertToDate } from "../../utils/hooks/useConvertToDate";
+import { newTimeStamp } from "../../utils/times";
+import { useContext } from "react";
+import { SoundContext } from "../../context/SoundContext";
+import { PLAY_SOUND } from "../../context/SoundContext";
 
-function MainTimer({
-  timeStamp,
-  time,
-}: {
-  timeStamp: string;
-  time: string;
-}) {
+function MainTimer({ timeStamp }: { timeStamp: string }) {
+  const expiryTimestamp = newTimeStamp(timeStamp);
 
-  const expiryTimestamp = useConvertToDate(timeStamp)
-
-  const { seconds, minutes, start, pause, restart } = useTimer({
+  const { seconds, minutes, pause, restart, resume } = useTimer({
     expiryTimestamp,
     autoStart: false,
-    onExpire: () => console.warn("onExpire called"),
+    onExpire: () => {
+      dispatch({ type: PLAY_SOUND, payload: { isMeditation: true } });
+    },
   });
 
-  const maxTime = useCalculateMaxTime(time);
+  const { dispatch } = useContext(SoundContext);
 
+  const maxTime = useCalculateMaxTime(timeStamp);
   const minsToSeconds = minutes * 60 + seconds;
-
   const currentTimeString = `${String(minutes)}:${String(seconds)}`;
 
   return (
-    <div style={{width: "230px"}}>
+    <div style={{ width: "230px" }}>
       <CircularProgressbarWithChildren
         value={minsToSeconds}
         maxValue={maxTime}
-        // text={currentTimeString}
         background
         styles={buildStyles({
           textColor: "#FFF",
-          backgroundColor: "#04BF8A",
-          pathColor: "#024059",
-          trailColor: "#FFF",
+          backgroundColor: "#746CC7",
+          pathColor: "#9D92E9",
+          trailColor: "#F3F2F7",
         })}
       >
         <div className="flex flex-col">
@@ -49,9 +45,12 @@ function MainTimer({
             {currentTimeString}
           </div>
           <div className="flex">
-            <ActionButton action="start"  handleClick={start} />
+            <ActionButton action="start" handleClick={resume} />
             <ActionButton action="pause" handleClick={pause} />
-            {/* <ActionButton action="restart" type="main" handleClick={restart} /> */}
+            <ActionButton
+              action="restart"
+              handleClick={() => restart(expiryTimestamp, false)}
+            />
           </div>
         </div>
       </CircularProgressbarWithChildren>

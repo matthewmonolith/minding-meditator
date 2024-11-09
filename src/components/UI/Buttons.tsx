@@ -41,16 +41,14 @@ export const ActionButton = ({
 
 export const TimerButton = ({
   expiryTimestamp,
-  isSelected,
   handleClick,
   type = "main",
 }: {
   expiryTimestamp: string;
-  isSelected: boolean;
   handleClick: () => void;
   type?: "main" | "reminder";
 }) => {
-  const colourStyles = type === "main" ? "bg-soft-4": "bg-soft-2"
+  const colourStyles = type === "main" ? "bg-soft-6": "bg-soft-4"
 
   return (
     <div className="relative">
