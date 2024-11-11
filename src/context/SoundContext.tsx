@@ -1,4 +1,4 @@
-import { createContext, useReducer, ReactNode, useEffect } from "react";
+import { createContext, useReducer, ReactNode } from "react";
 import { reminderSounds, meditationSounds } from "../utils/sounds";
 
 export const SET_REMINDER_SOUND = "SET_REMINDER_SOUND";
