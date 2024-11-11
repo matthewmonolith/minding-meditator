@@ -3,9 +3,13 @@ import { FiPlay, FiPause, FiRefreshCw } from "react-icons/fi";
 export const ActionButton = ({
   action,
   handleClick,
+  disabled,
+  isMeditation
 }: {
   action: "start" | "pause" | "restart";
   handleClick: () => void;
+  disabled?: boolean;
+  isMeditation?: boolean;
 }) => {
   const getIcon = () => {
     switch (action) {
@@ -33,6 +37,7 @@ export const ActionButton = ({
       type="button"
       className={`${getButtonStyles()} flex items-center justify-center focus:outline-none focus:ring-4 font-medium rounded-full text-sm p-3 text-center mb-2`}
       onClick={handleClick}
+      disabled={disabled && isMeditation}
     >
       {getIcon()}
     </button>

@@ -1,4 +1,4 @@
-import Sound from "./Sound";
+import SoundButton from "./SoundButton";
 
 export const SoundSection = ({
   sounds,
@@ -7,9 +7,10 @@ export const SoundSection = ({
   sounds: { name: string }[];
   isMeditationSound: boolean;
 }) => (
-  <div className="flex flex-wrap justify-center mt-6 mb-4">
+<div className="flex flex-col mt-6 mb-4 gap-2 sm:flex-row sm:flex-wrap sm:justify-center">
+
     {sounds.map((sound) => (
-      <Sound soundName={sound.name} key={sound.name} isMeditationSound={isMeditationSound} />
+      <SoundButton soundName={sound.name} key={sound.name} isMeditationSound={isMeditationSound} />
     ))}
   </div>
 );

@@ -23,7 +23,7 @@ function Sound({
 
   return (
     <button
-      className={`${colourStyle} transform transition-transform duration-300 ease-in-out active:scale-110 hover:scale-110`}
+      className={colourStyle}
       onClick={() =>
         dispatch({
           type: isMeditationSound ? SET_MEDITATION_SOUND : SET_REMINDER_SOUND,

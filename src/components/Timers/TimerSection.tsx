@@ -1,6 +1,5 @@
-import MainTimer from "./MainTimer";
+import Timer from "./Timer";
 import { TimerButton } from "../UI/Buttons";
-import Reminder from "./Reminder";
 
 export const TimerSection = ({
   times,
@@ -13,16 +12,15 @@ export const TimerSection = ({
       const isSelected = selectedTime === time;
       return isSelected ? (
         type === "main" ? (
-          <MainTimer timeStamp={time} time={time} key={time} />
+          <Timer timeStamp={time} key={time} isMeditation={true}/>
         ) : (
-          <Reminder timeStamp={time} key={time} />
+          <Timer timeStamp={time} key={time} isMeditation={false}/>
         )
       ) : (
         <TimerButton
           key={time || time}
           type={type === "reminder" ? "reminder" : undefined}
           expiryTimestamp={time || time}
-          isSelected={isSelected}
           handleClick={() => handleClick(time || time, type)}
         />
       );

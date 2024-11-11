@@ -1,6 +1,6 @@
 function Guide() {
   return (
-    <div>Guide</div>
+    <div className="text-center">Under construction!</div>
   )
 }
 export default Guide

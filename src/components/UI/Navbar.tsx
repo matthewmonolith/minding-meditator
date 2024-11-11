@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { LuAlarmClockCheck } from "react-icons/lu";
+import { FaCloud } from "react-icons/fa";
 import { useActiveLink } from "../../utils/hooks/useActiveLink";
 
 function Navbar() {
@@ -14,16 +14,12 @@ function Navbar() {
       title: "Guide",
       href: "/guide",
     },
-    {
-      title: "About",
-      href: "/about",
-    },
   ];
 
   return (
     <div className="bg-soft-3 p-4 flex items-center relative text-white">
       <Link to="/" className="inline-block">
-        <LuAlarmClockCheck className="text-2xl" />
+        <FaCloud className="text-2xl" />
       </Link>
       <div className="absolute left-1/2 -translate-x-1/2 flex space-x-8">
         {links.map((link) => {
