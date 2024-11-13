@@ -1,3 +1,4 @@
+import { useEffect, useState, useContext } from "react";
 import { useTimer } from "react-timer-hook";
 import { ActionButton } from "../UI/Buttons";
 import {
@@ -6,7 +7,6 @@ import {
 } from "react-circular-progressbar";
 import { useCalculateMaxTime } from "../../utils/hooks/useCalculateMaxTime";
 import { newTimeStamp } from "../../utils/times";
-import { useContext, useEffect, useState } from "react";
 import { SoundContext, PLAY_SOUND } from "../../context/SoundContext";
 
 function Timer({
@@ -19,12 +19,17 @@ function Timer({
   const expiryTimestamp = newTimeStamp(timeStamp);
   const { dispatch } = useContext(SoundContext);
   const [disabled, setDisabled] = useState(false);
+  const [userInteracted, setUserInteracted] = useState(false);
 
   const { seconds, minutes, pause, restart, resume } = useTimer({
     expiryTimestamp,
     autoStart: false,
     onExpire: () => {
-      dispatch({ type: PLAY_SOUND, payload: { isMeditation } });
+      if (userInteracted) {
+        dispatch({ type: PLAY_SOUND, payload: { isMeditation } });
+      } else {
+        console.warn("Sound blocked due to missing user interaction (chrome).");
+      }
 
       if (!isMeditation) {
         const now = newTimeStamp(timeStamp, true);
@@ -40,15 +45,19 @@ function Timer({
   useEffect(() => {
     setDisabled(minsToSeconds < 1);
   }, [minsToSeconds]);
-  
+
+  const handleUserInteraction = () => {
+    setUserInteracted(true);
+  };
 
   const handleRestart = () => {
     const newTime = newTimeStamp(timeStamp);
     restart(newTime, false);
+    handleUserInteraction(); // Mark interaction
   };
 
   return (
-    <div style={{ width: "230px" }}>
+    <div style={{ width: "230px" }} onClick={handleUserInteraction}>
       <CircularProgressbarWithChildren
         value={minsToSeconds}
         maxValue={maxTime}
@@ -67,13 +76,19 @@ function Timer({
           <div className="flex">
             <ActionButton
               action="start"
-              handleClick={resume}
+              handleClick={() => {
+                resume();
+                handleUserInteraction();
+              }}
               disabled={disabled}
               isMeditation={isMeditation}
             />
             <ActionButton
               action="pause"
-              handleClick={pause}
+              handleClick={() => {
+                pause();
+                handleUserInteraction();
+              }}
               disabled={disabled}
               isMeditation={isMeditation}
             />
