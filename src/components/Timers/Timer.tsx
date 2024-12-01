@@ -20,6 +20,7 @@ function Timer({
   const { dispatch } = useContext(SoundContext);
   const [disabled, setDisabled] = useState(false);
   const [userInteracted, setUserInteracted] = useState(false);
+  const [isActive, setIsActive] = useState(false);
 
   const { seconds, minutes, pause, restart, resume } = useTimer({
     expiryTimestamp,
@@ -28,7 +29,7 @@ function Timer({
       if (userInteracted) {
         dispatch({ type: PLAY_SOUND, payload: { isMeditation } });
       } else {
-        console.warn("Sound blocked due to missing user interaction (chrome).");
+        console.warn("Sound blocked due to missing user interaction.");
       }
 
       if (!isMeditation) {
@@ -53,6 +54,7 @@ function Timer({
   const handleRestart = () => {
     const newTime = newTimeStamp(timeStamp);
     restart(newTime, false);
+    setIsActive(false);
     handleUserInteraction(); // Mark interaction
   };
 
@@ -74,24 +76,30 @@ function Timer({
             {currentTimeString}
           </div>
           <div className="flex">
-            <ActionButton
-              action="start"
-              handleClick={() => {
-                resume();
-                handleUserInteraction();
-              }}
-              disabled={disabled}
-              isMeditation={isMeditation}
-            />
-            <ActionButton
-              action="pause"
-              handleClick={() => {
-                pause();
-                handleUserInteraction();
-              }}
-              disabled={disabled}
-              isMeditation={isMeditation}
-            />
+            {!isActive ? (
+              <ActionButton
+                action="start"
+                handleClick={() => {
+                  resume();
+                  handleUserInteraction();
+                  setIsActive(!isActive)
+                }}
+                disabled={disabled}
+                isMeditation={isMeditation}
+              />
+            ) : (
+              <ActionButton
+                action="pause"
+                handleClick={() => {
+                  pause();
+                  handleUserInteraction();
+                  setIsActive(!isActive)
+                }}
+                disabled={disabled}
+                isMeditation={isMeditation}
+              />
+            )}
+
             <ActionButton action="restart" handleClick={handleRestart} />
           </div>
         </div>
