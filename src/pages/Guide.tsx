@@ -8,35 +8,38 @@ function Guide() {
         <div className="px-6 py-4">
           <div className="font-bold text-xl mb-2">About</div>
           <p className="text-white text-base">
-            Mind The Gap is a simple and user friendly app to keep you focused
-            during your mindful meditations. When meditating, it can be easy
-            sometimes to get lost in thinking, Mind The Gap's Reminder Timer
-            helps you keep focused by playing a sound to bring you back into the
-            focus and onto your breathing.
+            Mind the Gap is a simple yet user-friendly app that helps you stay
+            focused during meditation. It has gentle reminder sounds that will
+            bring your focus back on your breath if your mind starts to wander.
           </p>
           <div className="font-bold text-xl mb-2 mt-2">Types of Timers</div>
           <p className="text-white text-base">
-            There are two types of timers, a meditation timer and a reminder
-            timer.
+            There are two timers available for use.
             <br />
-            The <strong>meditation timer</strong> is an optional timer to
-            countdown how long you wish to meditate for.
+            <div className="font-bold text-l mb-2 mt-2">Meditation:</div>
+            One for counting timing how long you wish to meditate for.
             <br />
-            The <strong>reminder timer</strong> will countdown and play your
-            selected sound once it runs out, then restarts itself. You can turn
-            on your reminder timer whilst the meditation timer is counting down. When the reminder timer runs out, it will reset the time and begin its countdown again.
+            <div className="font-bold text-l mb-2 mt-2">Reminder:</div>
+            Has a countdown to repeat a sound each time it ends, bringing you
+            return to focus. Can be used with or without the meditation timer.
           </p>
           <div className="font-bold text-xl mb-2 mt-2">Sounds</div>
           <p>
-            The meditation and reminder timer have their own sounds you can pick
-            from. They will play when the timer runs out. As well, on desktop,
-            there is a audio control on the bottom right corner to adjust the
-            volume. You can click on the speaker icon to mute and unmute
+            Both timers have their own sounds available. When a timer ends, it
+            will play a sound of your choice. On desktop you are able to adjust
+            the volume or mute/unmute using the speaker icon found at the bottom
+            right corner.
           </p>
-          <div className="font-bold text-xl mb-2 mt-2">Using Timers</div>
-          <p>
-           Click on one of the timer bubbles to select one. The outer ring colour represents the countdown. Press the play button to start the timer. If the timer is playing, you can press the pause button to pause the timer. The meditation timer and reminder time can run at the same time. Pressing the reset button will reset the timer.
-          </p>
+          <div className="font-bold text-xl mb-2 mt-2">How to use</div>
+          <ul>
+            <li>Click on the bubble timer to select it.
+              The outer ring shows much time is left
+            </li>
+            <li>
+              Press the play button to start. Pause button to pause, and restart to start over.
+              Both timers can run at the same time
+            </li>
+          </ul>
         </div>
       </div>
     </div>
