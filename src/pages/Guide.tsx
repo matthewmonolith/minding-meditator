@@ -3,12 +3,12 @@ import { Header } from "../components/UI/Header";
 function Guide() {
   return (
     <div className="flex flex-col items-center">
-      <Header title="Mind The Gap User Guide" bgColor="bg-soft-4" />
+      <Header title="Minding Meditator User Guide" bgColor="bg-soft-4" />
       <div className="max-w-md rounded overflow-hidden bg-soft-4 text-white mt-3">
         <div className="px-6 py-4">
           <div className="font-bold text-xl mb-2">About</div>
           <p className="text-white text-base">
-            Mind the Gap is a simple yet user-friendly app that helps you stay
+            Minding Meditator  is a simple yet user-friendly app that helps you stay
             focused during meditation. It has gentle reminder sounds that will
             bring your focus back on your breath if your mind starts to wander.
           </p>
