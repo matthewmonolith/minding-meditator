@@ -8,7 +8,7 @@ function Guide() {
         <div className="px-6 py-4">
           <div className="font-bold text-xl mb-2">About</div>
           <p className="text-white text-base">
-            Minding Meditator  is a simple yet user-friendly app that helps you stay
+            Minding Meditator is a simple yet user-friendly app that helps you stay
             focused during meditation. It has gentle reminder sounds that will
             bring your focus back on your breath if your mind starts to wander.
           </p>
